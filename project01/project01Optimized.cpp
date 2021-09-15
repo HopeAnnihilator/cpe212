@@ -12,8 +12,8 @@ void LoadImage(const string imagefile, int image[MAXROWS][MAXCOLS]) {
     // read image data and save to array
     for (int i = 0; i < MAXROWS; i++) {
         getline(input, data);
-        for (int j = 0; j < MAXCOLS; j++) {
-            image[i][j] = data[j * 2] - 48;
+        for (int notJ = 0; notJ < MAXCOLS; notJ++) {
+            image[i][notJ] = data[notJ * 2] - 48;
         }
     }
 
@@ -23,20 +23,20 @@ void LoadImage(const string imagefile, int image[MAXROWS][MAXCOLS]) {
 
 void FlipHorizontal(int image[MAXROWS][MAXCOLS]){
     for (int i=0; i < MAXROWS; i++) {
-        for (int j=0; j < MAXCOLS / 2; j++) {
-            image[i][j] = image[i][j] ^ image[i][9 - j];
-            image[i][9 - j] = image[i][j] ^ image[i][9 - j];
-            image[i][j] = image[i][j] ^ image[i][9 - j];
+        for (int notJ=0; notJ < MAXCOLS / 2; notJ++) {
+            image[i][notJ] = image[i][notJ] ^ image[i][9 - notJ];
+            image[i][9 - notJ] = image[i][notJ] ^ image[i][9 - notJ];
+            image[i][notJ] = image[i][notJ] ^ image[i][9 - notJ];
         }
     }
 }
 
 void FlipVertical(int image[MAXROWS][MAXCOLS]){
     for (int i=0; i < MAXROWS / 2; i++) {
-        for (int j=0; j < MAXCOLS; j++) {
-            image[i][j] = image[i][j] ^ image[9 - i][j];
-            image[9 - i][j] = image[i][j] ^ image[9 - i][j];
-            image[i][j] = image[i][j] ^ image[9 - i][j];
+        for (int notJ=0; notJ < MAXCOLS; notJ++) {
+            image[i][notJ] = image[i][notJ] ^ image[9 - i][notJ];
+            image[9 - i][notJ] = image[i][notJ] ^ image[9 - i][notJ];
+            image[i][notJ] = image[i][notJ] ^ image[9 - i][notJ];
         }
     }
 }
@@ -44,42 +44,42 @@ void FlipVertical(int image[MAXROWS][MAXCOLS]){
 
 void Transpose(int image[MAXROWS][MAXCOLS]){
     for (int i = 0; i < MAXROWS - 1; i++) {
-        for (int j = i + 1; j < MAXROWS; j++) {
-            image[i][j] = image[i][j] ^ image[j][i];
-            image[j][i] = image[i][j] ^ image[j][i];
-            image[i][j] = image[i][j] ^ image[j][i];
+        for (int notJ = i + 1; notJ < MAXROWS; notJ++) {
+            image[i][notJ] = image[i][notJ] ^ image[notJ][i];
+            image[notJ][i] = image[i][notJ] ^ image[notJ][i];
+            image[i][notJ] = image[i][notJ] ^ image[notJ][i];
         }
     }
 }
 
 void RotateCW(int image[MAXROWS][MAXCOLS]) {
     for (int i = 0; i < MAXROWS / 2; i++) {
-        for (int j = 0; j < MAXCOLS / 2; j++) {
-            image[i][j] = image[i][j] ^ image[i][9 - j]; 
-            image[i][9 - j] = image[i][j] ^ image[i][9 - j]; 
-            image[i][j] = image[i][j] ^ image[i][9 - j]; 
-            image[i][j] = image[i][j] ^ image[9 - i][9 - j]; 
-            image[9 - i][9 - j] = image[i][j] ^ image[9 - i][9 - j]; 
-            image[i][j] = image[i][j] ^ image[9 - i][9 - j]; 
-            image[i][j] = image[i][j] ^ image[9 - i][j]; 
-            image[9 - i][j] = image[i][j] ^ image[9 - i][j]; 
-            image[i][j] = image[i][j] ^ image[9 - i][j]; 
+        for (int notJ = 0; notJ < MAXCOLS / 2; notJ++) {
+            image[i][notJ] = image[i][notJ] ^ image[i][9 - notJ]; 
+            image[i][9 - notJ] = image[i][notJ] ^ image[i][9 - notJ]; 
+            image[i][notJ] = image[i][notJ] ^ image[i][9 - notJ]; 
+            image[i][notJ] = image[i][notJ] ^ image[9 - i][9 - notJ]; 
+            image[9 - i][9 - notJ] = image[i][notJ] ^ image[9 - i][9 - notJ]; 
+            image[i][notJ] = image[i][notJ] ^ image[9 - i][9 - notJ]; 
+            image[i][notJ] = image[i][notJ] ^ image[9 - i][notJ]; 
+            image[9 - i][notJ] = image[i][notJ] ^ image[9 - i][notJ]; 
+            image[i][notJ] = image[i][notJ] ^ image[9 - i][notJ]; 
         }
     }
 }
 
 void RotateCCW(int image[MAXROWS][MAXCOLS]){
     for (int i = 0; i < MAXROWS / 2; i++) {
-        for (int j = 0; j < MAXCOLS / 2; j++) {
-            image[i][j] = image[i][j] ^ image[9 - i][j]; 
-            image[9 - i][j] = image[i][j] ^ image[9 - i][j]; 
-            image[i][j] = image[i][j] ^ image[9 - i][j]; 
-            image[i][j] = image[i][j] ^ image[9 - i][9 - j]; 
-            image[9 - i][9 - j] = image[i][j] ^ image[9 - i][9 - j]; 
-            image[i][j] = image[i][j] ^ image[9 - i][9 - j]; 
-            image[i][j] = image[i][j] ^ image[i][9 - j]; 
-            image[i][9 - j] = image[i][j] ^ image[i][9 - j]; 
-            image[i][j] = image[i][j] ^ image[i][9 - j]; 
+        for (int notJ = 0; notJ < MAXCOLS / 2; notJ++) {
+            image[i][notJ] = image[i][notJ] ^ image[9 - i][notJ]; 
+            image[9 - i][notJ] = image[i][notJ] ^ image[9 - i][notJ]; 
+            image[i][notJ] = image[i][notJ] ^ image[9 - i][notJ]; 
+            image[i][notJ] = image[i][notJ] ^ image[9 - i][9 - notJ]; 
+            image[9 - i][9 - notJ] = image[i][notJ] ^ image[9 - i][9 - notJ]; 
+            image[i][notJ] = image[i][notJ] ^ image[9 - i][9 - notJ]; 
+            image[i][notJ] = image[i][notJ] ^ image[i][9 - notJ]; 
+            image[i][9 - notJ] = image[i][notJ] ^ image[i][9 - notJ]; 
+            image[i][notJ] = image[i][notJ] ^ image[i][9 - notJ]; 
         }
     }
 }
