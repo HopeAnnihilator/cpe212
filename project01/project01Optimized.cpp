@@ -34,9 +34,9 @@ void FlipHorizontal(int image[MAXROWS][MAXCOLS]){
 void FlipVertical(int image[MAXROWS][MAXCOLS]){
     for (int row = 0; row < MAXROWS / 2; row++) {
         for (int col=0; col < MAXCOLS; col++) {
-            image[row][col] = image[row][col] ^ image[9 - i][col];
-            image[9 - i][col] = image[row][col] ^ image[9 - i][col];
-            image[row][col] = image[row][col] ^ image[9 - i][col];
+            image[row][col] = image[row][col] ^ image[9 - row][col];
+            image[9 - row][col] = image[row][col] ^ image[9 - row][col];
+            image[row][col] = image[row][col] ^ image[9 - row][col];
         }
     }
 }
@@ -58,12 +58,12 @@ void RotateCW(int image[MAXROWS][MAXCOLS]) {
             image[row][col] = image[row][col] ^ image[row][9 - col]; 
             image[row][9 - col] = image[row][col] ^ image[row][9 - col]; 
             image[row][col] = image[row][col] ^ image[row][9 - col]; 
-            image[row][col] = image[row][col] ^ image[9 - i][9 - col]; 
-            image[9 - i][9 - col] = image[row][col] ^ image[9 - i][9 - col]; 
-            image[row][col] = image[row][col] ^ image[9 - i][9 - col]; 
-            image[row][col] = image[row][col] ^ image[9 - i][col]; 
-            image[9 - i][col] = image[row][col] ^ image[9 - i][col]; 
-            image[row][col] = image[row][col] ^ image[9 - i][col]; 
+            image[row][col] = image[row][col] ^ image[9 - row][9 - col]; 
+            image[9 - row][9 - col] = image[row][col] ^ image[9 - row][9 - col]; 
+            image[row][col] = image[row][col] ^ image[9 - row][9 - col]; 
+            image[row][col] = image[row][col] ^ image[9 - row][col]; 
+            image[9 - row][col] = image[row][col] ^ image[9 - row][col]; 
+            image[row][col] = image[row][col] ^ image[9 - row][col]; 
         }
     }
 }
@@ -71,12 +71,12 @@ void RotateCW(int image[MAXROWS][MAXCOLS]) {
 void RotateCCW(int image[MAXROWS][MAXCOLS]){
     for (int row = 0; row < MAXROWS / 2; row++) {
         for (int col = 0; col < MAXCOLS / 2; col++) {
-            image[row][col] = image[row][col] ^ image[9 - i][col]; 
-            image[9 - i][col] = image[row][col] ^ image[9 - i][col]; 
-            image[row][col] = image[row][col] ^ image[9 - i][col]; 
-            image[row][col] = image[row][col] ^ image[9 - i][9 - col]; 
-            image[9 - i][9 - col] = image[row][col] ^ image[9 - i][9 - col]; 
-            image[row][col] = image[row][col] ^ image[9 - i][9 - col]; 
+            image[row][col] = image[row][col] ^ image[9 - row][col]; 
+            image[9 - row][col] = image[row][col] ^ image[9 - row][col]; 
+            image[row][col] = image[row][col] ^ image[9 - row][col]; 
+            image[row][col] = image[row][col] ^ image[9 - row][9 - col]; 
+            image[9 - row][9 - col] = image[row][col] ^ image[9 - row][9 - col]; 
+            image[row][col] = image[row][col] ^ image[9 - row][9 - col]; 
             image[row][col] = image[row][col] ^ image[row][9 - col]; 
             image[row][9 - col] = image[row][col] ^ image[row][9 - col]; 
             image[row][col] = image[row][col] ^ image[row][9 - col]; 
