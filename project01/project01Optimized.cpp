@@ -4,7 +4,7 @@ void LoadImage(const string imagefile, int image[MAXROWS][MAXCOLS]) {
     input.open(imagefile.c_str());
     string data;
 
-    // dump the first two lines
+    // dump the first two lines, headers
     for (int i = 0; i < 2; i++) {
         getline(input, data);
     }
@@ -53,11 +53,33 @@ void Transpose(int image[MAXROWS][MAXCOLS]){
 }
 
 void RotateCW(int image[MAXROWS][MAXCOLS]) {
-    Transpose(image);
-    FlipHorizontal(image);
+    for (int i = 0; i < MAXROWS / 2; i++) {
+        for (int j = 0; j < MAXCOLS / 2; j++) {
+            image[i][j] = image[i][j] ^ image[i][9 - j]; 
+            image[i][9 - j] = image[i][j] ^ image[i][9 - j]; 
+            image[i][j] = image[i][j] ^ image[i][9 - j]; 
+            image[i][j] = image[i][j] ^ image[9 - i][9 - j]; 
+            image[9 - i][9 - j] = image[i][j] ^ image[9 - i][9 - j]; 
+            image[i][j] = image[i][j] ^ image[9 - i][9 - j]; 
+            image[i][j] = image[i][j] ^ image[9 - i][j]; 
+            image[9 - i][j] = image[i][j] ^ image[9 - i][j]; 
+            image[i][j] = image[i][j] ^ image[9 - i][j]; 
+        }
+    }
 }
 
 void RotateCCW(int image[MAXROWS][MAXCOLS]){
-    Transpose(image);
-    FlipVertical(image);
+    for (int i = 0; i < MAXROWS / 2; i++) {
+        for (int j = 0; j < MAXCOLS / 2; j++) {
+            image[i][j] = image[i][j] ^ image[9 - i][j]; 
+            image[9 - i][j] = image[i][j] ^ image[9 - i][j]; 
+            image[i][j] = image[i][j] ^ image[9 - i][j]; 
+            image[i][j] = image[i][j] ^ image[9 - i][9 - j]; 
+            image[9 - i][9 - j] = image[i][j] ^ image[9 - i][9 - j]; 
+            image[i][j] = image[i][j] ^ image[9 - i][9 - j]; 
+            image[i][j] = image[i][j] ^ image[i][9 - j]; 
+            image[i][9 - j] = image[i][j] ^ image[i][9 - j]; 
+            image[i][j] = image[i][j] ^ image[i][9 - j]; 
+        }
+    }
 }
