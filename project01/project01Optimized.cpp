@@ -1,3 +1,5 @@
+void swap_values(int (*)[10], int, int);
+
 void LoadImage(const string imagefile, int image[MAXROWS][MAXCOLS]) {
     // create filestream and open file
     ifstream input;
@@ -24,9 +26,7 @@ void LoadImage(const string imagefile, int image[MAXROWS][MAXCOLS]) {
 void FlipHorizontal(int image[MAXROWS][MAXCOLS]){
     for (int row = MAXROWS - 1; row >= 0; row--) {
         for (int col = MAXCOLS / 2; col >= 0; col--) {
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)];
-            (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)];
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)];
+            swap_values(image, row * 10 + col, row * 10 + (MAXCOLS - 1 -col));
         }
     }
 }
@@ -34,9 +34,7 @@ void FlipHorizontal(int image[MAXROWS][MAXCOLS]){
 void FlipVertical(int image[MAXROWS][MAXCOLS]){
     for (int row = MAXROWS / 2; row >= 0; row--) {
         for (int col = MAXCOLS - 1; col >= 0; col--) {
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + col];
-            (&image[0][0])[(MAXROWS - 1 - row) * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + col];
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + col];
+            swap_values(image, row * 10 + col, (MAXROWS - 1 - row) * 10 + col);
         }
     }
 }
@@ -45,9 +43,7 @@ void FlipVertical(int image[MAXROWS][MAXCOLS]){
 void Transpose(int image[MAXROWS][MAXCOLS]){
     for (int row = MAXROWS - 1; row >= 0; row--) {
         for (int col = row + 1; col < MAXROWS; col++) {
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ image[col][row];
-            image[col][row] = (&image[0][0])[row * 10 + col] ^ image[col][row];
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ image[col][row];
+            swap_values(image, row * 10 + col, col * 10 + row);
         }
     }
 }
@@ -55,15 +51,9 @@ void Transpose(int image[MAXROWS][MAXCOLS]){
 void RotateCW(int image[MAXROWS][MAXCOLS]) {
     for (int row = MAXROWS / 2; row >= 0; row--) {
         for (int col = MAXCOLS / 2; col >= 0; col--) {
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)]; 
-            (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)]; 
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)]; 
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + (MAXCOLS - 1 -col)]; 
-            (&image[0][0])[(MAXROWS - 1 - row) * 10 + (MAXCOLS - 1 -col)] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + (MAXCOLS - 1 -col)]; 
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + (MAXCOLS - 1 -col)]; 
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + col]; 
-            (&image[0][0])[(MAXROWS - 1 - row) * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + col]; 
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + col]; 
+            swap_values(image, row * 10 + col , row * 10 + (MAXCOLS - 1 -col));
+            swap_values(image, row * 10 + col, (MAXROWS - 1 - row) * 10 + (MAXCOLS - 1 -col));
+            swap_values(image, row * 10 + col, (MAXROWS - 1 - row) * 10 + col);
         }
     }
 }
@@ -71,16 +61,15 @@ void RotateCW(int image[MAXROWS][MAXCOLS]) {
 void RotateCCW(int image[MAXROWS][MAXCOLS]){
     for (int row = MAXROWS / 2; row >= 0; row--) {
         for (int col = MAXCOLS / 2; col >= 0; col--) {
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + col]; 
-            (&image[0][0])[(MAXROWS - 1 - row) * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + col]; 
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + col]; 
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + (MAXCOLS - 1 -col)]; 
-            (&image[0][0])[(MAXROWS - 1 - row) * 10 + (MAXCOLS - 1 -col)] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + (MAXCOLS - 1 -col)]; 
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[(MAXROWS - 1 - row) * 10 + (MAXCOLS - 1 -col)]; 
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)]; 
-            (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)]; 
-            (&image[0][0])[row * 10 + col] = (&image[0][0])[row * 10 + col] ^ (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)]; 
+            swap_values(image, row * 10 + col, (MAXROWS - 1 - row) * 10 + col);
+            swap_values(image, row * 10 + col, (MAXROWS - 1 - row) * 10 + (MAXCOLS - 1 -col));
+            swap_values(image, row * 10 + col, row * 10 + (MAXCOLS - 1 -col));
         }
     }
 }
 
+void swap_values(int image[MAXROWS][MAXCOLS], int swapThis, int withThis) {
+    (&image[0][0])[swapThis] = (&image[0][0])[swapThis] ^ (&image[0][0])[withThis];
+    (&image[0][0])[withThis] = (&image[0][0])[swapThis] ^ (&image[0][0])[withThis];
+    (&image[0][0])[swapThis] = (&image[0][0])[swapThis] ^ (&image[0][0])[withThis];
+}
