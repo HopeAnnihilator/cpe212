@@ -13,7 +13,7 @@ void LoadImage(const string imagefile, int image[MAXROWS][MAXCOLS]) {
     for (int row = 0; row < MAXROWS; ++row) {
         getline(input, inputData);
         for (int col = 0; col < MAXCOLS; ++col) {
-            (&image[0][0])[(MAXROWS - 1 - row) * MAXROWS + col] = inputData[col * 2] - 48;
+            (&image[0][0])[row * MAXROWS + col] = inputData[col * 2] - 48;
         }
     }
 
@@ -40,8 +40,8 @@ void FlipVertical(int image[MAXROWS][MAXCOLS]){
 
 void Transpose(int image[MAXROWS][MAXCOLS]){
     for (int row = 0; row < MAXROWS; ++row) {
-        for (int col = row + 1; col < MAXROWS; ++col) {
-            swap((&image[0][0])[row * MAXROWS + col], (&image[0][0])[col * MAXCOLS + row]);
+        for (int col = row + 1; col < MAXCOLS; ++col) {
+            swap((&image[0][0])[row * MAXROWS + col], image[col][row]);
         }
     }
 }
