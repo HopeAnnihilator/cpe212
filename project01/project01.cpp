@@ -13,7 +13,7 @@ void LoadImage(const string imagefile, int image[MAXROWS][MAXCOLS]) {
     for (int row = 0; row < MAXROWS; ++row) {
         getline(input, inputData);
         for (int col = 0; col < MAXCOLS; ++col) {
-            (&image[0][0])[(MAXROWS - 1 - row) * 10 + col] = inputData[col * 2] - 48;
+            (&image[0][0])[(MAXROWS - 1 - row) * MAXROWS + col] = inputData[col * 2] - 48;
         }
     }
 
@@ -24,7 +24,7 @@ void LoadImage(const string imagefile, int image[MAXROWS][MAXCOLS]) {
 void FlipHorizontal(int image[MAXROWS][MAXCOLS]){
     for (int row = 0; row < MAXROWS; ++row) {
         for (int col = 0; col < MAXCOLS / 2; ++col) {
-            swap((&image[0][0])[row * 10 + col], (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)]);
+            swap((&image[0][0])[row * MAXROWS + col], (&image[0][0])[row * MAXROWS + (MAXCOLS - 1 -col)]);
         }
     }
 }
@@ -32,7 +32,7 @@ void FlipHorizontal(int image[MAXROWS][MAXCOLS]){
 void FlipVertical(int image[MAXROWS][MAXCOLS]){
     for (int row = 0; row < MAXROWS / 2; ++row) {
         for (int col = 0; col < MAXCOLS; ++col) {
-            swap((&image[0][0])[row * 10 + col], (&image[0][0])[(MAXROWS - 1 - row) * 10 + col]);
+            swap((&image[0][0])[row * MAXROWS + col], (&image[0][0])[(MAXROWS - 1 - row) * MAXROWS + col]);
         }
     }
 }
@@ -41,7 +41,7 @@ void FlipVertical(int image[MAXROWS][MAXCOLS]){
 void Transpose(int image[MAXROWS][MAXCOLS]){
     for (int row = 0; row < MAXROWS; ++row) {
         for (int col = row + 1; col < MAXROWS; ++col) {
-            swap((&image[0][0])[row * 10 + col], (&image[0][0])[col * 10 + row]);
+            swap((&image[0][0])[row * MAXROWS + col], (&image[0][0])[col * MAXCOLS + row]);
         }
     }
 }
@@ -49,9 +49,9 @@ void Transpose(int image[MAXROWS][MAXCOLS]){
 void RotateCW(int image[MAXROWS][MAXCOLS]) {
     for (int row = 0; row < MAXROWS / 2; ++row) {
         for (int col = 0; col < MAXCOLS / 2; ++col) {
-            swap((&image[0][0])[row * 10 + col], (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)]);
-            swap((&image[0][0])[row * 10 + col], (&image[0][0])[(MAXROWS - 1 - row) * 10 + (MAXCOLS - 1 -col)]);
-            swap((&image[0][0])[row * 10 + col], (&image[0][0])[(MAXROWS - 1 - row) * 10 + col]);
+            swap((&image[0][0])[row * MAXROWS + col], (&image[0][0])[row * MAXROWS + (MAXCOLS - 1 -col)]);
+            swap((&image[0][0])[row * MAXROWS + col], (&image[0][0])[(MAXROWS - 1 - row) * MAXROWS + (MAXCOLS - 1 -col)]);
+            swap((&image[0][0])[row * MAXROWS + col], (&image[0][0])[(MAXROWS - 1 - row) * MAXROWS + col]);
         }
     }
 }
@@ -59,9 +59,9 @@ void RotateCW(int image[MAXROWS][MAXCOLS]) {
 void RotateCCW(int image[MAXROWS][MAXCOLS]){
     for (int row = 0; row < MAXROWS / 2; ++row) {
         for (int col = 0; col < MAXCOLS / 2; ++col) {
-            swap((&image[0][0])[row * 10 + col], (&image[0][0])[(MAXROWS - 1 - row) * 10 + col]);
-            swap((&image[0][0])[row * 10 + col], (&image[0][0])[(MAXROWS - 1 - row) * 10 + (MAXCOLS - 1 -col)]);
-            swap((&image[0][0])[row * 10 + col], (&image[0][0])[row * 10 + (MAXCOLS - 1 -col)]);
+            swap((&image[0][0])[row * MAXROWS + col], (&image[0][0])[(MAXROWS - 1 - row) * MAXROWS + col]);
+            swap((&image[0][0])[row * MAXROWS + col], (&image[0][0])[(MAXROWS - 1 - row) * MAXROWS + (MAXCOLS - 1 -col)]);
+            swap((&image[0][0])[row * MAXROWS + col], (&image[0][0])[row * MAXROWS + (MAXCOLS - 1 -col)]);
         }
     }
 }
