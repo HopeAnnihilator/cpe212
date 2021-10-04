@@ -3,12 +3,11 @@
 #include "heart.h"
 
 Heart::Heart(int v) : RedCard(v){
-  Card heart;
-  heart.SetValue(v);
-  heart.SetColor("red");
-  heart.SetSuit('H');
+  Card::SetSuit('H');
 }
 string Heart::Description() const {
-  Card heart;
-  heart.Description();
+  string output = Card::Description();
+  output = output + ", Color = " + Card::GetColor();
+  output = output + ", Suit = " + Card::GetSuit();
+  return output;
 }

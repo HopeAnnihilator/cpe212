@@ -3,12 +3,11 @@
 #include "spade.h"
 
 Spade::Spade(int v) : BlackCard(v) {
-  Card spade;
-  spade.SetValue(v);
-  spade.SetColor("black");
-  spade.SetSuit('S');
+Card::SetSuit('S');
 }
 string Spade::Description() const {
-  Card spade;
-  spade.Description();
+  string output = Card::Description();
+  output = output + ", Color = " + Card::GetColor();
+  output = output + ", Suit = " + Card::GetSuit();
+  return output;
 }

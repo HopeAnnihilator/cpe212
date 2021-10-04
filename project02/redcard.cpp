@@ -2,12 +2,11 @@
 #include <cstdlib>
 #include "redcard.h"
 
-RedCard::RedCard(int v) {
-  Card redcard;
-  redcard.SetValue(v);
-  redcard.SetColor("red");
+RedCard::RedCard(int v) : Card(v) {
+  Card::SetColor("red");
 }
 string RedCard::Description() const {
-  Card redcard;
-  redcard.Description();
+  string output = Card::Description();
+  output = output + ", Color = " + Card::GetColor();
+  return output;
 }

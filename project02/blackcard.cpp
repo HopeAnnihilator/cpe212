@@ -2,12 +2,11 @@
 #include <cstdlib>
 #include "blackcard.h"
 
-BlackCard::BlackCard(int v) {
-  Card blackcard;
-  blackcard.SetValue(v);
-  blackcard.SetColor("black");
-  //cout << blackcard.Description();
+BlackCard::BlackCard(int v) : Card(v) {
+  Card::SetColor("black");
 }
-string BlackCard::Description() const{
-  cout << "hi";
+string BlackCard::Description() const {
+  string output = Card::Description();
+  output = output + ", Color = " + Card::GetColor();
+  return output;
 }

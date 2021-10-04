@@ -3,12 +3,12 @@
 #include "club.h"
 
 Club::Club(int v) : BlackCard(v) {
-  Card club;
-  club.SetValue(v);
-  club.SetColor("black");
-  club.SetSuit('C');
+  Card::SetSuit('C');
 }
 string Club::Description() const {
-  Card club;
-  club.Description();
+  string output = Card::Description();
+  output = output + ", Color = " + Card::GetColor();
+  output = output + ", Suit = " + Card::GetSuit();
+  return output;
 }
+

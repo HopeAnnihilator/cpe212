@@ -48,7 +48,7 @@ class Card                      // Class modeling Card ADT
 	
   /* Add your code here */      // Description prototype: Polymorphic Function!!!
 	                            // Outputs card characteristics - value as a string (see sample output from p01input1.txt)
-    string Description() const;
+    virtual string Description() const;
 };
 
 

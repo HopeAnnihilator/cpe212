@@ -3,12 +3,12 @@
 #include "diamond.h"
 
 Diamond::Diamond(int v) : RedCard(v) {
-  Card diamond;
-  diamond.SetValue(v);
-  diamond.SetColor("red");
-  diamond.SetSuit('D');
+  Card::SetSuit('D');
 }
 string Diamond::Description() const {
-  Card diamond;
-  diamond.Description();
+  string output = Card::Description();
+  output = output + ", Color = " + Card::GetColor();
+  output = output + ", Suit = " + Card::GetSuit();
+  return output;
 }
+
