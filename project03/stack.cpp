@@ -6,8 +6,15 @@ using namespace std;
 
 void Stack::Resize(int n) {
     try {
+        int tmparray[num];
+        for (int i = num - 1; i >= 0; i--) {
+            tmparray[i] = array[i];
+        }
         num *= 2;
-        int* array = new int [num];
+        array = new int [num];
+        for (int i = 0; i < num; i++) {
+            array[i] = tmparray[i];
+        }   
         Push(n);
     } catch (exception &e) {
         StackFull full;
@@ -57,7 +64,7 @@ void Stack::MakeEmpty() {
 
 int Stack::Top() const {
     if (!IsEmpty()) {
-        return array[top];
+        return Peek(0);
     } else {
         StackEmpty empty;
         throw empty;
