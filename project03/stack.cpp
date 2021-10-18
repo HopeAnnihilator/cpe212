@@ -6,15 +6,13 @@ using namespace std;
 
 void Stack::Resize(int n) {
     try {
-        int tmparray[num];
+        num *= 2;
+        int* tmparray = new int[num];
         for (int i = num - 1; i >= 0; i--) {
             tmparray[i] = array[i];
         }
-        num *= 2;
-        array = new int [num];
-        for (int i = 0; i < num; i++) {
-            array[i] = tmparray[i];
-        }   
+        delete[] array;
+        array = tmparray;
         Push(n);
     } catch (exception &e) {
         StackFull full;
