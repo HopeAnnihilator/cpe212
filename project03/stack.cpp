@@ -13,7 +13,7 @@ void Stack::Resize(int n) {
         delete[] array;
         array = tmparray;
     } catch (exception &e) {
-        throw StackFull{};
+        throw StackFull();
     }
 }
 
@@ -40,7 +40,7 @@ void Stack::Push(int n) {
 
 void Stack::Pop() {
     if (IsEmpty()) {
-        throw StackEmpty{};
+        throw StackEmpty();
     } else {
         top--;
     }
@@ -62,7 +62,7 @@ int Stack::Top() const {
     if (!IsEmpty()) {
         return Peek(0);
     } else {
-        throw StackEmpty{}
+        throw StackEmpty();
     }
 }
 
@@ -72,7 +72,7 @@ int Stack::Size() const {
 
 int Stack::Max() const {
     if (IsEmpty()) {
-        throw StackEmpty{}
+        throw StackEmpty();
     } else {
         int max = Peek(0);
         for (int i = 0; i <= top; i++) {
@@ -86,7 +86,7 @@ int Stack::Max() const {
 
 int Stack::Min() const {
     if (IsEmpty()) {
-        throw StackEmpty{}
+        throw StackEmpty();
     } else {
         int min = Peek(0);
         for (int i = 0; i <= top; i++) {
@@ -100,7 +100,7 @@ int Stack::Min() const {
 
 int Stack::Peek(unsigned int n) const {
     if (n > top || IsEmpty()) {
-        throw StackInvalidPeek{};
+        throw StackInvalidPeek();
     } else {
         return array[top - n];
     }
